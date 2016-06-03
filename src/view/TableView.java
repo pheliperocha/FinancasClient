@@ -5,9 +5,12 @@
  */
 package view;
 
+import static control.CategoriaControl.listarCategorias;
+import static control.CommonFunctions.desformatData;
 import static control.CommonFunctions.formatMoeda;
 import static control.CommonFunctions.desformatMoeda;
 import static control.CommonFunctions.formatBoolean;
+import static control.CommonFunctions.formatData;
 import java.awt.Component;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -21,6 +24,9 @@ import javax.swing.table.TableCellRenderer;
 import static control.MovimentoControl.atualizarMovimento;
 import static control.MovimentoControl.getTotal;
 import java.text.Normalizer;
+import java.util.List;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import static view.MainView.GREEN;
 import static view.MainView.RED;
 import static view.MainView.WHITE;
@@ -33,7 +39,6 @@ public class TableView implements TableModelListener {
     private final JTable table;
     private final DefaultTableModel model;
     private final Object[] columnsName;
-    
     
     static final int COUNT_COL = 7;
     static final int SELECT_COL = 0;
@@ -127,11 +132,23 @@ public class TableView implements TableModelListener {
                     
                 }
                 
+                // Impede que coloque valor diferente de formato data DD/MM/YYYY
+                if (column == DATA_COL) {
+                    
+                    try {
+                        aValue = formatData(desformatData(aValue.toString()));
+                    } catch (ParseException ex) {
+                        return;
+                    }
+                    
+                }
+                
                 getModel().setValueAt(aValue, convertRowIndexToModel(row),
                         convertColumnIndexToModel(column));
             }
             
         };
+
         columnsName[SELECT_COL] = "Selecionar";
         columnsName[ID_COL] = "ID";
         columnsName[DATA_COL] = "Data";
@@ -148,13 +165,13 @@ public class TableView implements TableModelListener {
      * @param listaMovimentos
      * @return
      */
-    public JTable getTable(ArrayList<ws.Movimento> listaMovimentos) {
+    public JTable getTable(ArrayList<ws.Movimento> listaMovimentos) throws ParseException {
         Object[] rowData = new Object[COUNT_COL];
-        
+
         for (int i = 0; i < listaMovimentos.size(); i++) {
             rowData[SELECT_COL] = Boolean.FALSE;
             rowData[ID_COL] = listaMovimentos.get(i).getId();
-            rowData[DATA_COL] = listaMovimentos.get(i).getData();
+            rowData[DATA_COL] = formatData(listaMovimentos.get(i).getData());
             rowData[NOME_COL] = listaMovimentos.get(i).getNome();
             rowData[CAT_COL] = listaMovimentos.get(i).getCategoria();
             rowData[FREQ_COL] = formatBoolean(listaMovimentos.get(i).isFrequencia());
@@ -166,10 +183,28 @@ public class TableView implements TableModelListener {
         
         
         table.setModel(model);
+        
+        table.getColumnModel().getColumn(CAT_COL).setCellEditor(new DefaultCellEditor(getComboCat()));
+        
         model.addTableModelListener(this);
 
         return table;
        
+    }
+    
+    private JComboBox getComboCat() {
+        
+        List<ws.Categoria> listaCategorias = listarCategorias();
+        String[] comboBoxArray = new String[listaCategorias.size()];
+        
+        for (int i = 0; i < listaCategorias.size(); i++) {
+            comboBoxArray[i] = listaCategorias.get(i).getNome();
+        }
+        
+        JComboBox jcb = new JComboBox(comboBoxArray);
+        jcb.setEditable(true);
+        
+        return jcb;
     }
 
     @Override
@@ -197,6 +232,16 @@ public class TableView implements TableModelListener {
                 val = "1";
             } else {
                 val = "0";
+            }
+            
+        }
+        
+        if (col == DATA_COL) {
+            
+            try {
+                val = desformatData(val);
+            } catch (ParseException ex) {
+                Logger.getLogger(TableView.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }

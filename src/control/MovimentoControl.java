@@ -10,13 +10,7 @@ package control;
  * @author PhelipeRocha
  */
 public class MovimentoControl {
-    
-    public static java.util.List<ws.Movimento> listarMovimentos() {
-        ws.FinancasService_Service service = new ws.FinancasService_Service();
-        ws.FinancasService port = service.getFinancasServicePort();
-        return port.listarMovimentos();
-    }
-    
+
     public static double getTotal(java.lang.String type) {
         ws.FinancasService_Service service = new ws.FinancasService_Service();
         ws.FinancasService port = service.getFinancasServicePort();
@@ -27,6 +21,12 @@ public class MovimentoControl {
         ws.FinancasService_Service service = new ws.FinancasService_Service();
         ws.FinancasService port = service.getFinancasServicePort();
         return port.atualizarMovimento(id, col, value);
+    }
+
+    public static java.util.List<ws.Movimento> listarMovimentos() {
+        ws.FinancasService_Service service = new ws.FinancasService_Service();
+        ws.FinancasService port = service.getFinancasServicePort();
+        return port.listarMovimentos();
     }
     
 }

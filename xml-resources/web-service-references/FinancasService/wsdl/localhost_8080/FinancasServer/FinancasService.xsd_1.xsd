@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://ws/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws/">
+
+<xs:element name="atualizarCategoria" type="tns:atualizarCategoria"/>
+
+<xs:element name="atualizarCategoriaResponse" type="tns:atualizarCategoriaResponse"/>
+
+<xs:element name="atualizarMovimento" type="tns:atualizarMovimento"/>
+
+<xs:element name="atualizarMovimentoResponse" type="tns:atualizarMovimentoResponse"/>
+
+<xs:element name="deletarCategoria" type="tns:deletarCategoria"/>
+
+<xs:element name="deletarCategoriaResponse" type="tns:deletarCategoriaResponse"/>
+
+<xs:element name="deletarMovimento" type="tns:deletarMovimento"/>
+
+<xs:element name="deletarMovimentoResponse" type="tns:deletarMovimentoResponse"/>
+
+<xs:element name="getTotal" type="tns:getTotal"/>
+
+<xs:element name="getTotalResponse" type="tns:getTotalResponse"/>
+
+<xs:element name="inserirCategoria" type="tns:inserirCategoria"/>
+
+<xs:element name="inserirCategoriaResponse" type="tns:inserirCategoriaResponse"/>
+
+<xs:element name="inserirMovimento" type="tns:inserirMovimento"/>
+
+<xs:element name="inserirMovimentoResponse" type="tns:inserirMovimentoResponse"/>
+
+<xs:element name="listarCategorias" type="tns:listarCategorias"/>
+
+<xs:element name="listarCategoriasResponse" type="tns:listarCategoriasResponse"/>
+
+<xs:element name="listarMovimentos" type="tns:listarMovimentos"/>
+
+<xs:element name="listarMovimentosResponse" type="tns:listarMovimentosResponse"/>
+
+<xs:complexType name="atualizarCategoria">
+<xs:sequence>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+<xs:element name="nome" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="atualizarCategoriaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="inserirMovimento">
+<xs:sequence>
+<xs:element name="nome" type="xs:string" minOccurs="0"/>
+<xs:element name="frequencia" type="xs:boolean"/>
+<xs:element name="categoria" type="xs:int"/>
+<xs:element name="valor" type="xs:int"/>
+<xs:element name="data" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="inserirMovimentoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listarCategorias">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="listarCategoriasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:categoria" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="categoria">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="nome" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTotal">
+<xs:sequence>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTotalResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listarMovimentos">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="listarMovimentosResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:movimento" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="movimento">
+<xs:sequence>
+<xs:element name="categoria" type="xs:string" minOccurs="0"/>
+<xs:element name="data" type="xs:string" minOccurs="0"/>
+<xs:element name="frequencia" type="xs:boolean"/>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="nome" type="xs:string" minOccurs="0"/>
+<xs:element name="valor" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="atualizarMovimento">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="col" type="xs:int"/>
+<xs:element name="value" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="atualizarMovimentoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deletarCategoria">
+<xs:sequence>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deletarCategoriaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deletarMovimento">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deletarMovimentoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="inserirCategoria">
+<xs:sequence>
+<xs:element name="nome" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="inserirCategoriaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

@@ -11,6 +11,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -46,7 +47,7 @@ public class MainView implements ActionListener {
     static final Color GREEN = Color.decode("#39B663");
     static final Color WHITE = Color.decode("#FFFFFF");
     
-    public MainView(double totalReceitas, double totalDespesas, double totalGeral, ArrayList<ws.Movimento> listaMovimentos) {
+    public MainView(double totalReceitas, double totalDespesas, double totalGeral, ArrayList<ws.Movimento> listaMovimentos) throws ParseException {
         frame.setTitle("Gerenciador de finanças pessoais");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         

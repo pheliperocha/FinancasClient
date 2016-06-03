@@ -4,4 +4,6 @@
     <system systemId="http://localhost:8080/FinancasWService/FinancasService?xsd=1" uri="xml-resources/web-service-references/FinancasService/wsdl/localhost_8080/FinancasWService/FinancasService.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/FinancasWebService/FinancasService?wsdl" uri="xml-resources/web-service-references/FinancasService/wsdl/localhost_8080/FinancasWebService/FinancasService.wsdl"/>
     <system systemId="http://localhost:8080/FinancasWebService/FinancasService?xsd=1" uri="xml-resources/web-service-references/FinancasService/wsdl/localhost_8080/FinancasWebService/FinancasService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/FinancasServer/FinancasService?wsdl" uri="xml-resources/web-service-references/FinancasService/wsdl/localhost_8080/FinancasServer/FinancasService.wsdl"/>
+    <system systemId="http://localhost:8080/FinancasServer/FinancasService?xsd=1" uri="xml-resources/web-service-references/FinancasService/wsdl/localhost_8080/FinancasServer/FinancasService.xsd_1.xsd"/>
 </catalog>

@@ -18,8 +18,8 @@
     </target>
     <target name="wsimport-client-FinancasService" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/FinancasService"/>
-        <property name="wsdl-FinancasService" location="xml-resources/web-service-references/FinancasService/wsdl/localhost_8080/FinancasWebService/FinancasService.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/FinancasService" destdir="${build.generated.dir}/jax-wsCache/FinancasService" wsdl="${wsdl-FinancasService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/FinancasWebService/FinancasService?wsdl" xnocompile="true" xendorsed="true">
+        <property name="wsdl-FinancasService" location="xml-resources/web-service-references/FinancasService/wsdl/localhost_8080/FinancasServer/FinancasService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/FinancasService" destdir="${build.generated.dir}/jax-wsCache/FinancasService" wsdl="${wsdl-FinancasService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/FinancasServer/FinancasService?wsdl" xnocompile="true" xendorsed="true">
             <depends file="${wsdl-FinancasService}"/>
             <produces dir="${build.generated.dir}/jax-wsCache/FinancasService"/>
         </wsimport>

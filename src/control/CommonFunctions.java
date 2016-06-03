@@ -7,6 +7,10 @@ package control;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  *
@@ -40,6 +44,24 @@ public class CommonFunctions {
         } else {
             return "Não";
         }
+        
+    }
+    
+    public static String formatData(String data) throws ParseException {
+        
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(data);
+        String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        
+        return formattedDate;
+        
+    }
+    
+    public static String desformatData(String data) throws ParseException {
+        
+        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        
+        return formattedDate;
         
     }
     
