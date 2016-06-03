@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/FinancasWService/FinancasService?wsdl" uri="xml-resources/web-service-references/FinancasService/wsdl/localhost_8080/FinancasWService/FinancasService.wsdl"/>
+    <system systemId="http://localhost:8080/FinancasWService/FinancasService?xsd=1" uri="xml-resources/web-service-references/FinancasService/wsdl/localhost_8080/FinancasWService/FinancasService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/FinancasWebService/FinancasService?wsdl" uri="xml-resources/web-service-references/FinancasService/wsdl/localhost_8080/FinancasWebService/FinancasService.wsdl"/>
+    <system systemId="http://localhost:8080/FinancasWebService/FinancasService?xsd=1" uri="xml-resources/web-service-references/FinancasService/wsdl/localhost_8080/FinancasWebService/FinancasService.xsd_1.xsd"/>
+</catalog>
