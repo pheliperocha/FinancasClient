@@ -24,6 +24,7 @@ import javax.swing.table.TableCellRenderer;
 import static control.MovimentoControl.atualizarMovimento;
 import static control.MovimentoControl.getTotal;
 import java.text.Normalizer;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
@@ -48,6 +49,8 @@ public class TableView implements TableModelListener {
     static final int CAT_COL = 4;
     static final int FREQ_COL = 5;
     static final int VAL_COL = 6;
+    
+    String[] comboBoxArray;
     
     
     public TableView() {
@@ -143,6 +146,15 @@ public class TableView implements TableModelListener {
                     
                 }
                 
+                // Impede que coloque uma categoria que não exista
+                if (column == CAT_COL) {
+                    
+                    if (!Arrays.asList(comboBoxArray).contains(aValue)) {
+                        return;
+                    }
+                    
+                }
+                
                 getModel().setValueAt(aValue, convertRowIndexToModel(row),
                         convertColumnIndexToModel(column));
             }
@@ -195,7 +207,7 @@ public class TableView implements TableModelListener {
     private JComboBox getComboCat() {
         
         List<ws.Categoria> listaCategorias = listarCategorias();
-        String[] comboBoxArray = new String[listaCategorias.size()];
+        comboBoxArray = new String[listaCategorias.size()];
         
         for (int i = 0; i < listaCategorias.size(); i++) {
             comboBoxArray[i] = listaCategorias.get(i).getNome();
