@@ -23,11 +23,13 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import static control.MovimentoControl.atualizarMovimento;
 import static control.MovimentoControl.getTotal;
+import static control.MovimentoControl.listarMovimentos;
 import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.SwingUtilities;
 import static view.MainView.GREEN;
 import static view.MainView.RED;
 import static view.MainView.WHITE;
@@ -102,6 +104,12 @@ public class TableView implements TableModelListener {
             
             @Override
             public void setValueAt(Object aValue, int row, int column) {
+                
+                SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+                            updateTable();
+			}
+		});
                 
                 // Impede que coloque valores não monetários na coluna de valor
                 if (column == VAL_COL) {
@@ -191,17 +199,34 @@ public class TableView implements TableModelListener {
             
             model.addRow(rowData);
         }
-        
-        
-        
+
         table.setModel(model);
         
         table.getColumnModel().getColumn(CAT_COL).setCellEditor(new DefaultCellEditor(getComboCat()));
+        table.getTableHeader().setReorderingAllowed(false);
         
         model.addTableModelListener(this);
 
         return table;
        
+    }
+    
+    public void updateTable() {
+        
+        Object[] rowData = new Object[COUNT_COL];
+        
+        rowData[SELECT_COL] = Boolean.FALSE;
+        rowData[ID_COL] = "1";
+        rowData[DATA_COL] = "2016/03/23";
+        rowData[NOME_COL] = "sdfdsf";
+        rowData[CAT_COL] = "Transporte";
+        rowData[FREQ_COL] = "Sim";
+        rowData[VAL_COL] = "R$ 800,00";
+        
+        model.addRow(rowData);
+        
+        table.removeAll();
+
     }
     
     private JComboBox getComboCat() {

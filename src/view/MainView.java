@@ -13,13 +13,15 @@ import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class MainView implements ActionListener {
+public class MainView {
     
     private final JFrame frame = new JFrame();
     private final Container container = frame.getContentPane();
@@ -32,7 +34,7 @@ public class MainView implements ActionListener {
     private final Container despesasPanel = new JPanel();
     private final Container totalPanel = new JPanel();
     
-    private final TableView table = new TableView();
+    static final TableView table = new TableView();
     
     private final JLabel lblReceitas = new JLabel("Receitas:");
     private final JLabel lblDespesas = new JLabel("Despesas:");
@@ -96,9 +98,14 @@ public class MainView implements ActionListener {
         scrollPane = new JScrollPane(table.getTable(listaMovimentos));
 
         JButton btnAdd = new JButton("Adicionar");
-        btnAdd.addActionListener(this);
-        
+        btnAdd.addActionListener((ActionEvent e) -> {
+            AddView addFrame = new AddView();
+        });
+
         JButton btnCat = new JButton("Gerenciar Categorias");
+        btnCat.addActionListener((ActionEvent e) -> {
+            CategoryView catFrame = new CategoryView();
+        });
         
         footer.setLayout(new FlowLayout(FlowLayout.RIGHT));
         footer.add(btnCat);
@@ -118,13 +125,5 @@ public class MainView implements ActionListener {
         frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 
         frame.setVisible(true);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        
-        AddView addFrame = new AddView();
-        
-    }
-    
+    }    
 }

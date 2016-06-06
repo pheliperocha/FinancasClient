@@ -28,5 +28,11 @@ public class MovimentoControl {
         ws.FinancasService port = service.getFinancasServicePort();
         return port.listarMovimentos();
     }
+
+    public static int inserirMovimento(java.lang.String nome, boolean frequencia, int categoria, int valor, java.lang.String data) {
+        ws.FinancasService_Service service = new ws.FinancasService_Service();
+        ws.FinancasService port = service.getFinancasServicePort();
+        return port.inserirMovimento(nome, frequencia, categoria, valor, data);
+    }
     
 }

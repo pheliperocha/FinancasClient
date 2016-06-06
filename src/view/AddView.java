@@ -1,5 +1,7 @@
 package view;
 
+import static control.CategoriaControl.listarCategorias;
+import static control.MovimentoControl.inserirMovimento;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -7,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -18,6 +21,10 @@ import javax.swing.JTextField;
 public class AddView implements ActionListener {
     
     private final JFrame frame = new JFrame();
+    private final JTextField nomeField = new JTextField();
+    private final JTextField frequenciaField = new JTextField();
+    private final JTextField valorField = new JTextField();
+    private final JTextField dataField = new JTextField();
     
     public AddView() {
         frame.setTitle("Adicionar");
@@ -26,7 +33,6 @@ public class AddView implements ActionListener {
         c.setLayout(new GridLayout(6,1,20,20));
         
         JLabel lblNome = new JLabel("Nome:");
-        JTextField nomeField = new JTextField();
         
         Container nomePanel = new JPanel();
         nomePanel.setLayout(new GridLayout(2,1));
@@ -34,36 +40,20 @@ public class AddView implements ActionListener {
         nomePanel.add(nomeField);
         
         JLabel lblFrequencia = new JLabel("Frequência:");
-        JTextField frequenciaField = new JTextField();
         
         Container frequenciaPanel = new JPanel();
         frequenciaPanel.setLayout(new GridLayout(2,1));
         frequenciaPanel.add(lblFrequencia);
         frequenciaPanel.add(frequenciaField);
         
-        String[] petStrings = { "Contas", "Serviços", "Transporte", "Alimentação", "Outros", "Nova Categoria" };
         JLabel lblCategoria = new JLabel("Categoria:");
-        JComboBox categoriaField = new JComboBox(petStrings);
-        categoriaField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                
-                JComboBox comboBox = (JComboBox) event.getSource();
-                Object selected = comboBox.getSelectedItem();
-                if(selected.toString().equals("Nova Categoria")) {
-                    CategoryView categoryFrame = new CategoryView();
-                }
-                
-
-            }
-        });
         
         Container categoriaPanel = new JPanel();
         categoriaPanel.setLayout(new GridLayout(2,1));
         categoriaPanel.add(lblCategoria);
-        categoriaPanel.add(categoriaField);
+        categoriaPanel.add(getComboCat());
         
         JLabel lblValor = new JLabel("Valor:");
-        JTextField valorField = new JTextField();
         
         Container valorPanel = new JPanel();
         valorPanel.setLayout(new GridLayout(2,1));
@@ -71,7 +61,6 @@ public class AddView implements ActionListener {
         valorPanel.add(valorField);
         
         JLabel lblData = new JLabel("Data:");
-        JTextField dataField = new JTextField();
         
         Container dataPanel = new JPanel();
         dataPanel.setLayout(new GridLayout(2,1));
@@ -106,14 +95,25 @@ public class AddView implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        inserirMovimento("Novo", false, 1, 968, "2015-03-10");
+        
+        inserirMovimento(nomeField.getText(), Boolean.parseBoolean(frequenciaField.getText()), 1, Integer.getInteger(valorField.getText()), dataField.getText());
+        
         frame.setVisible(false);
     }
-
-    private static int inserirMovimento(java.lang.String nome, boolean frequencia, int categoria, int valor, java.lang.String data) {
-        ws.FinancasService_Service service = new ws.FinancasService_Service();
-        ws.FinancasService port = service.getFinancasServicePort();
-        return port.inserirMovimento(nome, frequencia, categoria, valor, data);
+    
+    private JComboBox getComboCat() {
+        
+        List<ws.Categoria> listaCategorias = listarCategorias();
+        String[] catList = new String[listaCategorias.size()];
+        
+        for (int i = 0; i < listaCategorias.size(); i++) {
+            catList[i] = listaCategorias.get(i).getNome();
+        }
+        
+        JComboBox jcb = new JComboBox(catList);
+        jcb.setEditable(true);
+        
+        return jcb;
     }
     
 }
